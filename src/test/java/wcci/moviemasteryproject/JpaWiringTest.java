@@ -23,22 +23,26 @@ public class JpaWiringTest {
 	@Autowired
 	private MovieRepository movieRepo;
 	
+	@Autowired
+	private SeriesRepository seriesRepo;
 	
 	@Autowired
 	private ActorRepository actorRepo;
 
-	
-	
-//	private Series series;
-	
+	private Actor vinDisel;
+	private Series fastAndFuriousMovieSeries;
+
 	
 	@Before
 	public void setup() {
 	
-	Actor actorTest = new Actor ("name", "imageUrl", "dob", "pob");
+	Actor actorTest = new Actor ("vinDisel", "imageUrl", "dob", "pob");
 	actorRepo.save(actorTest);
+	
+	Series seriesTest = new Series(vinDisel, "fastAndFuriousMovieSeries", "imageUrl", "recordLabel");
+	seriesRepo.save(seriesTest);
 		
-	Movie movieTest = new Movie ("title","link", "time");
+	Movie movieTest = new Movie (fastAndFuriousMovieSeries, "theFastAndFuriousMovie","link", "time");
 	movieRepo.save(movieTest);
 	
 	entityManager.flush();
@@ -53,12 +57,19 @@ public class JpaWiringTest {
 	
 	@Test
 	public void shouldSaveAndLoadActor() {
-		assertThat(actorRepo.findByName("name").getName(), is("name"));
+		assertThat(actorRepo.findByName("vinDisel").getName(), is("vinDisel"));
 	}
 	
-//	@Test
-//	public void shouldSaveAndLoadMovie() {
-//		assertThat(movieRepo.findByTitle("title").getTitle(), is("title"));
-//	}
+	@Test
+	public void shouldSaveAndLoadSeries() {
+		assertThat(seriesRepo.findByTitle("fastAndFuriousMovieSeries").getTitle(), is("fastAndFuriousMovieSeries"));
+	}
+	
+	@Test
+	public void shouldSaveAndLoadMovie() {
+		assertThat(movieRepo.findByTitle("theFastAndFuriousMovie").getTitle(), is("theFastAndFuriousMovie"));
+	}
 
+	
+	//ADD TEST- shouldAddAnotherMovieToSeries and shouldAddAnotherSeriesToActor
 }

@@ -16,8 +16,8 @@ public class Actor {
 	private Long id;
 	
 	
-//	@OneToMany (mappedBy = "actor")
-//	private Collection<Series> series;
+	@OneToMany (mappedBy = "actor")
+	private Collection<Series> series;
 	
 	
 	
@@ -32,7 +32,7 @@ public class Actor {
 		this.imageUrl = imageUrl;
 		this.dob = dob;
 		this.pob = pob;
-//		this.series = new ArrayList<Series>();
+		this.series = new ArrayList<Series>();
 		
 	}
 	
@@ -51,10 +51,10 @@ public class Actor {
 		return id;
 	}
 
-
-//	public Collection<Series> getSeries() {
-//		return series;
-//	}
+	//Why is this?
+	public Collection<Series> getSeries() {
+		return series;
+	}
 
 
 	public String getName() {
@@ -76,30 +76,30 @@ public class Actor {
 		return pob;
 	}
 
-//	@Override
-//	public int hashCode() {
-//		final int prime = 31;
-//		int result = 1;
-//		result = prime * result + ((id == null) ? 0 : id.hashCode());
-//		return result;
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Actor other = (Actor) obj;
-//		if (id == null) {
-//			if (other.id != null)
-//				return false;
-//		} else if (!id.equals(other.id))
-//			return false;
-//		return true;
-//	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Actor other = (Actor) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 	
 	
 	
